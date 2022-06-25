@@ -52,7 +52,8 @@ Vì thế tùy tình hình thực tế mà port có thể thay đổi trong lệ
 
 **2.3 Tạo ví và tạo validator**
 
-Giả sử ở bước 2.2.1 đã nhập SEI-ID là **seid2**, vậy thư mục cài đặt sẽ là /root/seid2, thực hiện tạo ví, sau đó xin faucet ở discord
+Giả sử ở bước 2.2.1 đã nhập SEI-ID là **seid2**, vậy thư mục cài đặt sẽ là /root/seid2, thực hiện tạo ví như bên dưới, sau đó xin faucet ở discord
+
         export SEI_PATH="$HOME/seid2"
         seid2 keys add YOUR_WALLET_NAME --home $SEI_PATH
         
