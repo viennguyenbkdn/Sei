@@ -44,6 +44,35 @@ Vì thế tùy tình hình thực tế mà port có thể thay đổi trong lệ
    - Sau khi đã quy hoạch xong, thực hiện đổi port trong các file, giả sử là **app.toml**
           
           vi app.toml      
-      Gõ **:set nu** thì file sẽ hiện lên thứ tự dòng, tìm tới dòng cần đổi và đổi port. Đổi xong cả thì save và thoát file
-      
+      Gõ **:set nu** thì file sẽ hiện lên thứ tự dòng, tìm tới dòng cần đổi và đổi port. Đổi xong cả thì save và thoát file. Tương tự thực hiện cho các file còn lại
+ 
+  Thực hiện chạy node để kiểm tra, nếu có xung đột port thì tiến trình sẽ dừng lại, mình stop tiến trình và tìm xem port xung đột nằm đâu như bước 2.2.2. Giả sử ở bước 2.2.1 đã nhập SEI-ID là **seid2**, thì hệ thống tạo ra **seid2.service** tương ứng
   
+          systemctl restart seid2.service 
+
+**2.3 Tạo ví và tạo validator**
+
+Giả sử ở bước 2.2.1 đã nhập SEI-ID là **seid2**, vậy thư mục cài đặt sẽ là /root/seid2, thực hiện tạo ví, sau đó xin faucet ở discord
+        export SEI_PATH="$HOME/seid2"
+        seid2 keys add YOUR_WALLET_NAME --home $SEI_PATH
+        
+Sau khi xin faucet thì tạo validator thứ 2 như sau
+
+        seid2 tx staking create-validator \
+        --amount=900000usei \
+        --home $SEI_PATH \
+        --pubkey=$(seid2 tendermint show-validator --home $SEI_PATH) \
+        --moniker=YOUR_NODENAME \
+        --chain-id=sei-testnet-2 \
+        --commission-rate="0.10" \
+        --commission-max-rate="0.20" \
+        --commission-max-change-rate="0.01" \
+        --min-self-delegation=1 \
+        --from=YOUR_WALLET_NAME
+        -y
+
+**2.4 Kiểm tra trạng thái của các VM**
+
+Tùy port tương ứng của VM mà sử dụng các lệnh sau
+
+         curl -s localhost:26757/status | jq '.result."sync_info",.result."validator_info",.result."node_info"."network"'
