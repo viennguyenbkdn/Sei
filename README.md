@@ -19,7 +19,7 @@ Giả sử ở bước 2.2.1, chúng ta đã nhập **NODENAME=VM-Seid-2** và *
 Thực hiện tìm port cần đổi và thay đổi port. Thông thường các dự án xài Cosmos SDK thì thường xài chung default port của Tendermint là 2265x, 909x, 606x...
 Vì thế tùy tình hình thực tế mà port có thể thay đổi trong lệnh (tốt nhất cứ chạy VM mới, show log và lỗi ở port nào thì tìm và đổi)
 
-        cd $HOME/seid2/config && grep "909*\|266*\|1317\|606*" *.toml
+        cd $HOME/seid2/config && grep -n "909.*\|266.*\|1317\|606.*" *.toml | grep -v persistent_peers
  
  Kết quả thực hiện lệnh sẽ như sau
  
