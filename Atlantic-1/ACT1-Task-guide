@@ -1,3 +1,4 @@
+================================================ IBC GUIDE ================================================================================
 IBC Available Relay between Sei and another IBC (Ref: https://3pgv.notion.site/Seinami-IBC-Channels-cfcc9c1996234d4fa40d1a90a7e6d7d4)
  
 1. Axelar Testnet 
@@ -39,3 +40,37 @@ IBC Available Relay between Sei and another IBC (Ref: https://3pgv.notion.site/S
     Example:
       seid tx ibc-transfer -y transfer transfer channel-7 quick1mzphfr55nxxj8ffthapzkecs04h66lrmewwcvv 1000usei --chain-id atlantic-1 --from=vps16g-204-atlantic
       quicksilverd tx ibc-transfer -y transfer transfer channel-88 sei1a9xlveztyf2xaatqs7rxl3tr3wnxj42s5rvexw 10000uqck --chain-id killerqueen-1 --from=vps16g-204
+
+4. AURA testnet  
+    Channel
+      atlantic-1: channel-19
+      aura: channel-0
+
+5. KUJIRA testnet  
+    Channel
+      altantic-1: channel-25
+      harpoon-4: channel-12
+
+==================================================== TASK ====================================================
+1. Be in the set of the first 50 addresses to carry in/out an eligible IBC transfer of a CW20 token to/from Seinami testnet
+   - Install binary file or node of Sei and another Cosmos chain
+   - Create wallet and get faucet in discord of corresponding project
+   - Do IBC transfer following abode guide. If you dont install node, add the option --node=http://RPC_IP:RPC_PORT (check project discord for available validator node)
+
+2. Be in the set of the first 50 addresses to carry out an eligible IBC transfer of a ERC20 token to/from Seinami testnet (with another cosmos chain)
+   - In Metamask, login Ropsten network and get some test Ropsten ETH, then go to testnet Uniswap to swap Ropsten ETH to WETH.
+   - Install binary file of Axelar as below
+       git clone https://github.com/axelarnetwork/axelarate-community.git
+       cd axelarate-community
+       ulimit -n 16384
+       ./scripts/setup-node.sh -n testnet
+       mv /root/.axelar_testnet/bin/axelard /usr/local/bin
+   - Create Axelar wallet by commandline or by Kelpr, then get faucet from the link: https://faucet.testnet.axelar.dev/
+   - Bridge WETH from Ropsten chain to Axelar chain by Axelar Bridge app on the link https://testnet.satellite.money/       
+   - Now your Axelar wallet have some ERC20 token, you can do a IBC transfer by above command from Axelar Network to Sei Network
+   - Pay attention that you dont install Axelar node, so u have to keep the option --node=http://... in the above command
+   
+       
+       
+       
+       
