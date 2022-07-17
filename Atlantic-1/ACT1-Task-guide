@@ -1,1 +1,41 @@
 IBC Available Relay between Sei and another IBC (Ref: https://3pgv.notion.site/Seinami-IBC-Channels-cfcc9c1996234d4fa40d1a90a7e6d7d4)
+ 
+1. Axelar Testnet 
+    Channel
+      atlantic-1: channel-29 | connection-21 | 07-tendermint-43
+      axelar-testnet-lisbon-3: channel-35 | connection-31 | 07-tendermint-65
+
+    Command for IBC between Axelar & Sei
+      axelard tx ibc-transfer -y transfer transfer channel-35 SEI_ADDRESS 10000000000000000weth-wei --chain-id axelar-testnet-lisbon-3 --from=AXELAR_WALLET_NAME --node=https://axelar-lisbon-rpc.allthatnode.com:26657 --fees=20uaxl
+      seid tx ibc-transfer -y transfer transfer channel-29 AXELAR_ADDRESS 1000usei --chain-id atlantic-1 --from=SEI_WALLET_NAME --fees=20usei
+      
+    Example:
+      axelard tx ibc-transfer -y transfer transfer channel-35 sei1a9xlveztyf2xaatqs7rxl3tr3wnxj42s5rvexw 99940000000000000weth-wei --chain-id axelar-testnet-lisbon-3 --from=axelar --node=https://axelar-lisbon-rpc.allthatnode.com:26657 --fees=20uaxl
+      seid tx ibc-transfer -y transfer transfer channel-29 axelar1mzphfr55nxxj8ffthapzkecs04h66lrmkygz7l 1000usei --chain-id atlantic-1 --from=vps16g-204-atlantic --fees=20usei
+      
+2. DEWEB testnet  
+    Channel
+      atlantic-1: channel-4
+      deweb-testnet-1: channel-3
+
+    Command for IBC between DEWEB & Sei
+      seid tx ibc-transfer -y transfer transfer channel-4 DEWEB_ADDRESS 100usei --chain-id atlantic-1 --from=SEI_WALLET_NAME
+      dewebd tx ibc-transfer -y transfer transfer channel-3 SEI_ADDRESS 100udws --chain-id=deweb-testnet-1 --from=DEWEB_WALLET_NAME -y --fees=20udws
+          
+    Example:
+     seid tx ibc-transfer -y transfer transfer channel-4 deweb1fnde8r90sy3lseva6q65pcn8h6367ps46vnawp 100usei --chain-id atlantic-1 --from=viennguyenbkdn
+     dewebd tx ibc-transfer -y transfer transfer channel-3 sei1j3pzhu2400f4ntv6kznlvramxv62w2d2fa0h5v 100udws --chain-id=deweb-testnet-1 --from=viennguyen16g -y --fees=20udws --gas-adjustment 1.2
+     
+      
+3. QUICKSILVER testnet  
+    Channel
+      atlantic-1: channel-7 | connection-9 | 07-tendermint-20 
+      killerqueen-1: channel-88 | connection-76 | 07-tendermint-180
+
+    Command for IBC between Quicksilverd & Sei
+      seid tx ibc-transfer -y transfer transfer channel-7 QUICK_ADDRESS 1000usei --chain-id atlantic-1 --from=SEI_WALLET_NAME
+      quicksilverd tx ibc-transfer -y transfer transfer channel-88 SEI_ADDRESS 10000uqck --chain-id killerqueen-1 --from=QUICK_WALLET_NAME
+    
+    Example:
+      seid tx ibc-transfer -y transfer transfer channel-7 quick1mzphfr55nxxj8ffthapzkecs04h66lrmewwcvv 1000usei --chain-id atlantic-1 --from=vps16g-204-atlantic
+      quicksilverd tx ibc-transfer -y transfer transfer channel-88 sei1a9xlveztyf2xaatqs7rxl3tr3wnxj42s5rvexw 10000uqck --chain-id killerqueen-1 --from=vps16g-204
