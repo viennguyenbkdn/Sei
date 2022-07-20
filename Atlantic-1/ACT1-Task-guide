@@ -1,5 +1,5 @@
 ================================================ IBC GUIDE ================================================================================
-IBC Available Relay between Sei and another IBC (Ref: https://3pgv.notion.site/Seinami-IBC-Channels-cfcc9c1996234d4fa40d1a90a7e6d7d4)
+IBC Channel giữa Sei và các chain khác (Ref: https://3pgv.notion.site/Seinami-IBC-Channels-cfcc9c1996234d4fa40d1a90a7e6d7d4)
  
 1. Axelar Testnet 
     Channel
@@ -50,65 +50,36 @@ IBC Available Relay between Sei and another IBC (Ref: https://3pgv.notion.site/S
     Channel
       altantic-1: channel-25
       harpoon-4: channel-12
+      
+6. Juno testnet
+    Channel
+      atlantic-1: channel_id: channel-53
+      uni-3: channel_id: channel-64
+    
+    Command for IBC between Juno & Sei
+      seid tx ibc-transfer transfer transfer channel-53 <juno testnet address> 1usei --from <wallet>  --fees 200usei --chain-id=atlantic-1 
+      junod tx ibc-transfer transfer transfer channel-64 <sei address> 1ujunox --from <wallet> --chain-id uni-3 --fees 500ujunox
 
 ==================================================== TASK ====================================================
-1. Be in the set of the first 50 addresses to carry in/out an eligible IBC transfer of a CW20 token to/from Seinami testnet
-   - Install binary file or node of Sei and another Cosmos chain
-   - Create wallet and get faucet in discord of corresponding project
-   - Do IBC transfer following abode guide. If you dont install node, add the option --node=http://RPC_IP:RPC_PORT (check project discord for available validator node)
+Task 1. Be in the set of the first 50 addresses to carry in/out an eligible IBC transfer of a CW20 token to/from Seinami testnet
+   - Trong task này, nếu không sử dụng CLI thì cần add Sei-chain và Juno-chain vào ví Kelpr, và add cả IBC Channel trên ví Kelpr như thông tin trên.
+   - Vào discord của Juno để xin faucet, sau đó vào link https://junomint.com/ để tạo token CW20 từ ví Juno. (link này cũng hỗ trợ add chain Juno Uni-3 testnet vào ví)
+   - Tham khảo link sau để thực hiện chuyển CW20 token từ Juno về Sei theo link: https://youtu.be/Yix0BThxTIU.
+   - Việc chuyển token CW20 từ Sei về Juno, thì thực hiện như chuyển token bình thường qua IBC transfer.
+   
+Task 2. Be in the set of the first 50 addresses to carry out an eligible IBC transfer of a ERC20 token to/from Seinami testnet (with another cosmos chain)
+Task 3. Be in the set of the first 50 addresses to carry out an eligible IBC transfer of a ERC20 token through Axelar Bridge to/from Seinami testnet
+   - Tại ví Metamask, chọn Ropsten network và xin 1 ít token Ropsten ETH.
+   - Sau đó vào Uniswap Tesnet để thực hiện swap Ropsten ETH to WETH
+   - Tạo ví của chain Axelar tesnet (axelar-testnet-lisbon-3) trên Kelpr, vào link sau xin faucet https://faucet.testnet.axelar.dev/
+   - Sử dụng Axelar Bridge (https://testnet.satellite.money/) để bridge WETH đến chain mong muốn
+   - Đối với task 2, thì thực hiện IBC transfer để nhận/gởi WETH giữa 1 chain cosmos khác và Sei.
+   - Đối với task 3, thì thực hiện IBC transfer để nhận/gởi WETH giữa 1 chain Axelar và Sei.
 
-2. Be in the set of the first 50 addresses to carry out an eligible IBC transfer of a ERC20 token to/from Seinami testnet (with another cosmos chain)
-   - In Metamask, login Ropsten network and get some test Ropsten ETH, then go to testnet Uniswap to swap Ropsten ETH to WETH.
-   - Install binary file of Axelar as below
-       git clone https://github.com/axelarnetwork/axelarate-community.git
-       cd axelarate-community
-       ulimit -n 16384
-       ./scripts/setup-node.sh -n testnet
-       mv /root/.axelar_testnet/bin/axelard /usr/local/bin
-   - Create Axelar wallet by commandline or by Kelpr, then get faucet from the link: https://faucet.testnet.axelar.dev/
-   - Bridge WETH from Ropsten chain to Axelar chain by Axelar Bridge app on the link https://testnet.satellite.money/       
-   - Now your Axelar wallet have some ERC20 token, you can do a IBC transfer by above command from Axelar Network to Sei Network
-   - Pay attention that you dont install Axelar node, so u have to keep the option --node=http://... in the above command
-
-3. Be in the set of the first 50 addresses to carry out an eligible IBC transfer of a ERC20 token through Axelar Bridge to/from Seinami testnet
-From EVM to Sei via Axelar Bridgeo (0x45E1ceD158801a4D8E6E19Bad5E29361Ca66a1FC)
-
-axelard tx axelarnet link ethereum 0x45E1ceD158801a4D8E6E19Bad5E29361Ca66a1FC weth-wei --from vps16g158--axelar --node=http://axelar-testnet-rpc.qubelabs.io:26657 --chain-id axelar-testnet-lisbon-3 --gas=auto --gas-adjustment=1.2
-
-Enter keyring passphrase:
-gas estimate: 663889
-{"height":"3037629","txhash":"A2A9155751E25084B96F4BE64C7F470782E0764E7D14E19DB68F1ADAE8D3B39D","codespace":"","code":0,"data":"0A6C0A252F6178656C61722E6178656C61726E65742E763162657461312E4C696E6B5265717565737412430A416178656C61723174653474323877376470687A3078793973786A35363330793938727564343078636339706D77703032666C3737746A37716A6C7375717668386D","raw_log":"[{\"log\":\"successfully linked deposit axelar1te4t28w7dphz0xy9sxj5630y98rud40xcc9pmwp02fl77tj7qjlsuqvh8m to recipient 0x45E1ceD158801a4D8E6E19Bad5E29361Ca66a1FC\",\"events\":[{\"type\":\"link\",\"attributes\":[{\"key\":\"module\",\"value\":\"axelarnet\"},{\"key\":\"sourceChain\",\"value\":\"Axelarnet\"},{\"key\":\"depositAddress\",\"value\":\"axelar1te4t28w7dphz0xy9sxj5630y98rud40xcc9pmwp02fl77tj7qjlsuqvh8m\"},{\"key\":\"destinationChain\",\"value\":\"Ethereum\"},{\"key\":\"destinationAddress\",\"value\":\"0x45E1ceD158801a4D8E6E19Bad5E29361Ca66a1FC\"},{\"key\":\"asset\",\"value\":\"weth-wei\"}]},{\"type\":\"message\",\"attributes\":[{\"key\":\"action\",\"value\":\"Link\"}]}]}]","logs":[{"msg_index":0,"log":"successfully linked deposit axelar1te4t28w7dphz0xy9sxj5630y98rud40xcc9pmwp02fl77tj7qjlsuqvh8m to recipient 0x45E1ceD158801a4D8E6E19Bad5E29361Ca66a1FC","events":[{"type":"link","attributes":[{"key":"module","value":"axelarnet"},{"key":"sourceChain","value":"Axelarnet"},{"key":"depositAddress","value":"axelar1te4t28w7dphz0xy9sxj5630y98rud40xcc9pmwp02fl77tj7qjlsuqvh8m"},{"key":"destinationChain","value":"Ethereum"},{"key":"destinationAddress","value":"0x45E1ceD158801a4D8E6E19Bad5E29361Ca66a1FC"},{"key":"asset","value":"weth-wei"}]},{"type":"message","attributes":[{"key":"action","value":"Link"}]}]}],"info":"","gas_wanted":"663889","gas_used":"563912","tx":null,"timestamp":"","events":[{"type":"coin_spent","attributes":[{"key":"c3BlbmRlcg==","value":"YXhlbGFyMTljOXV1c211bHFlbmptMHNoaGR3bnhqdXIwdGZ2ZTBlenEyZW1k","index":true},{"key":"YW1vdW50","value":"MzR1YXhs","index":true}]},{"type":"coin_received","attributes":[{"key":"cmVjZWl2ZXI=","value":"YXhlbGFyMTd4cGZ2YWttMmFtZzk2MnlsczZmODR6M2tlbGw4YzVsNWg0Z3F1","index":true},{"key":"YW1vdW50","value":"MzR1YXhs","index":true}]},{"type":"transfer","attributes":[{"key":"cmVjaXBpZW50","value":"YXhlbGFyMTd4cGZ2YWttMmFtZzk2MnlsczZmODR6M2tlbGw4YzVsNWg0Z3F1","index":true},{"key":"c2VuZGVy","value":"YXhlbGFyMTljOXV1c211bHFlbmptMHNoaGR3bnhqdXIwdGZ2ZTBlenEyZW1k","index":true},{"key":"YW1vdW50","value":"MzR1YXhs","index":true}]},{"type":"message","attributes":[{"key":"c2VuZGVy","value":"YXhlbGFyMTljOXV1c211bHFlbmptMHNoaGR3bnhqdXIwdGZ2ZTBlenEyZW1k","index":true}]},{"type":"tx","attributes":[{"key":"ZmVl","value":"MzR1YXhs","index":true}]},{"type":"tx","attributes":[{"key":"YWNjX3NlcQ==","value":"YXhlbGFyMTljOXV1c211bHFlbmptMHNoaGR3bnhqdXIwdGZ2ZTBlenEyZW1kLzI=","index":true}]},{"type":"tx","attributes":[{"key":"c2lnbmF0dXJl","value":"U0gxeEoyb3VkdXR5TFJobkNONm50MG56a21ITFFvVXRzdzFpdHJCd1VkQTJDbHdIWlRDR1BSakpnVlRQS1QyREdDbW41dHI5dW1jYTJOd2NsVkRid0E9PQ==","index":true}]},{"type":"message","attributes":[{"key":"YWN0aW9u","value":"TGluaw==","index":true}]},{"type":"link","attributes":[{"key":"bW9kdWxl","value":"YXhlbGFybmV0","index":true},{"key":"c291cmNlQ2hhaW4=","value":"QXhlbGFybmV0","index":true},{"key":"ZGVwb3NpdEFkZHJlc3M=","value":"YXhlbGFyMXRlNHQyOHc3ZHBoejB4eTlzeGo1NjMweTk4cnVkNDB4Y2M5cG13cDAyZmw3N3RqN3FqbHN1cXZoOG0=","index":true},{"key":"ZGVzdGluYXRpb25DaGFpbg==","value":"RXRoZXJldW0=","index":true},{"key":"ZGVzdGluYXRpb25BZGRyZXNz","value":"MHg0NUUxY2VEMTU4ODAxYTREOEU2RTE5QmFkNUUyOTM2MUNhNjZhMUZD","index":true},{"key":"YXNzZXQ=","value":"d2V0aC13ZWk=","index":true}]}]}
-
-
-seid tx ibc-transfer transfer transfer channel-29 axelar1te4t28w7dphz0xy9sxj5630y98rud40xcc9pmwp02fl77tj7qjlsuqvh8m --packet-timeout-timestamp 0 --packet-timeout-height "0-20000" 2000000000000000ibc/C2A89D98873BB55B62CE86700DFACA646EC80352E8D03CC6CF34DD44E46DC75D --chain-id atlantic-1 --from=vps8g-158-atlantic -y
-
-code: 0
-codespace: ""
-data: ""
-events: []
-gas_used: "0"
-gas_wanted: "0"
-height: "0"
-info: ""
-logs: []
-raw_log: '[]'
-timestamp: ""
-tx: null
-txhash: AC53BFEE732CD11F5B8979FAABD43F32B6675653876C8DFB497421F4415FF51D
-root@Contabo8g-158:~#
-
-axelard tx evm create-pending-transfers ethereum --from vps16g158--axelar --node=http://axelar-testnet-rpc.qubelabs.io:26657 --chain-id axelar-testnet-lisbon-3 --gas=auto --gas-adjustment=1.2
-
-Enter keyring passphrase:
-gas estimate: 639325
-{"height":"3037665","txhash":"8305800B57A23AF5555CDFD74241AE93D332CA64F21FFEBA30D706C6F1040876","codespace":"","code":0,"data":"0A330A312F6178656C61722E65766D2E763162657461312E43726561746550656E64696E675472616E736665727352657175657374","raw_log":"[{\"events\":[{\"type\":\"message\",\"attributes\":[{\"key\":\"action\",\"value\":\"CreatePendingTransfers\"}]}]}]","logs":[{"msg_index":0,"log":"","events":[{"type":"message","attributes":[{"key":"action","value":"CreatePendingTransfers"}]}]}],"info":"","gas_wanted":"639325","gas_used":"543442","tx":null,"timestamp":"","events":[{"type":"coin_spent","attributes":[{"key":"c3BlbmRlcg==","value":"YXhlbGFyMTljOXV1c211bHFlbmptMHNoaGR3bnhqdXIwdGZ2ZTBlenEyZW1k","index":true},{"key":"YW1vdW50","value":"MzJ1YXhs","index":true}]},{"type":"coin_received","attributes":[{"key":"cmVjZWl2ZXI=","value":"YXhlbGFyMTd4cGZ2YWttMmFtZzk2MnlsczZmODR6M2tlbGw4YzVsNWg0Z3F1","index":true},{"key":"YW1vdW50","value":"MzJ1YXhs","index":true}]},{"type":"transfer","attributes":[{"key":"cmVjaXBpZW50","value":"YXhlbGFyMTd4cGZ2YWttMmFtZzk2MnlsczZmODR6M2tlbGw4YzVsNWg0Z3F1","index":true},{"key":"c2VuZGVy","value":"YXhlbGFyMTljOXV1c211bHFlbmptMHNoaGR3bnhqdXIwdGZ2ZTBlenEyZW1k","index":true},{"key":"YW1vdW50","value":"MzJ1YXhs","index":true}]},{"type":"message","attributes":[{"key":"c2VuZGVy","value":"YXhlbGFyMTljOXV1c211bHFlbmptMHNoaGR3bnhqdXIwdGZ2ZTBlenEyZW1k","index":true}]},{"type":"tx","attributes":[{"key":"ZmVl","value":"MzJ1YXhs","index":true}]},{"type":"tx","attributes":[{"key":"YWNjX3NlcQ==","value":"YXhlbGFyMTljOXV1c211bHFlbmptMHNoaGR3bnhqdXIwdGZ2ZTBlenEyZW1kLzM=","index":true}]},{"type":"tx","attributes":[{"key":"c2lnbmF0dXJl","value":"UE1pSHJJeG1aZUZnNVlTbXVRU3ZWamVPRG1Qd3NOMk5sYXNqN05VcDhDODFka2pFSkc0eDNBdExwRUxFeHFDd2hlQlQ1aGdHTlU5RDhyUmxUQW1vakE9PQ==","index":true}]},{"type":"message","attributes":[{"key":"YWN0aW9u","value":"Q3JlYXRlUGVuZGluZ1RyYW5zZmVycw==","index":true}]}]}
-
-
-axelard tx evm sign-commands ethereum --from vps16g158--axelar --node=http://axelar-testnet-rpc.qubelabs.io:26657 --chain-id axelar-testnet-lisbon-3 --gas=auto --gas-adjustment=1.2
-Enter keyring passphrase:
-gas estimate: 408255
-{"height":"3037680","txhash":"E0D7B9149A3009A0F448C6FDE8BEA0EC46D75833AAA7168C0A0E34072E9E9F79","codespace":"","code":0,"data":"0A290A272F6178656C61722E65766D2E763162657461312E5369676E436F6D6D616E647352657175657374","raw_log":"[{\"log\":\"no command to sign found\",\"events\":[{\"type\":\"message\",\"attributes\":[{\"key\":\"action\",\"value\":\"SignCommands\"}]}]}]","logs":[{"msg_index":0,"log":"no command to sign found","events":[{"type":"message","attributes":[{"key":"action","value":"SignCommands"}]}]}],"info":"","gas_wanted":"408255","gas_used":"350884","tx":null,"timestamp":"","events":[{"type":"coin_spent","attributes":[{"key":"c3BlbmRlcg==","value":"YXhlbGFyMTljOXV1c211bHFlbmptMHNoaGR3bnhqdXIwdGZ2ZTBlenEyZW1k","index":true},{"key":"YW1vdW50","value":"MjF1YXhs","index":true}]},{"type":"coin_received","attributes":[{"key":"cmVjZWl2ZXI=","value":"YXhlbGFyMTd4cGZ2YWttMmFtZzk2MnlsczZmODR6M2tlbGw4YzVsNWg0Z3F1","index":true},{"key":"YW1vdW50","value":"MjF1YXhs","index":true}]},{"type":"transfer","attributes":[{"key":"cmVjaXBpZW50","value":"YXhlbGFyMTd4cGZ2YWttMmFtZzk2MnlsczZmODR6M2tlbGw4YzVsNWg0Z3F1","index":true},{"key":"c2VuZGVy","value":"YXhlbGFyMTljOXV1c211bHFlbmptMHNoaGR3bnhqdXIwdGZ2ZTBlenEyZW1k","index":true},{"key":"YW1vdW50","value":"MjF1YXhs","index":true}]},{"type":"message","attributes":[{"key":"c2VuZGVy","value":"YXhlbGFyMTljOXV1c211bHFlbmptMHNoaGR3bnhqdXIwdGZ2ZTBlenEyZW1k","index":true}]},{"type":"tx","attributes":[{"key":"ZmVl","value":"MjF1YXhs","index":true}]},{"type":"tx","attributes":[{"key":"YWNjX3NlcQ==","value":"YXhlbGFyMTljOXV1c211bHFlbmptMHNoaGR3bnhqdXIwdGZ2ZTBlenEyZW1kLzQ=","index":true}]},{"type":"tx","attributes":[{"key":"c2lnbmF0dXJl","value":"L2ZEa3JIZDJ6YXBmcmsyT3FIbE92bWs5RjV5WkxIUU16Z2hHNk1FK2cwUS85SW9oZVd5U2dWeGdsQVRNNUZ2MHUrZ1NXaFJqelMyRXMranhGN1RLMXc9PQ==","index":true}]},{"type":"message","attributes":[{"key":"YWN0aW9u","value":"U2lnbkNvbW1hbmRz","index":true}]}]}
-
+P/S: Nếu ae không rành command line, thì add chain cần thiết vào Kelpr, sau đó add IBC Channel (như thông tin phía trên) và thực hiện chuyển token qua IBC Transfer từ ví Kelp
+   
+Task 4: Tạo IBC Channel và duy trì 
+   - Task này khá là khó, ae nào ưa thì làm theo link nhé, dài quá nên lười. Link mình sử dụng: https://hermes.informal.systems/config.html
 
        
        
