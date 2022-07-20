@@ -60,6 +60,9 @@ IBC Channel giữa Sei và các chain khác (Ref: https://3pgv.notion.site/Seina
       seid tx ibc-transfer transfer transfer channel-53 <juno testnet address> 1usei --from <wallet>  --fees 200usei --chain-id=atlantic-1 
       junod tx ibc-transfer transfer transfer channel-64 <sei address> 1ujunox --from <wallet> --chain-id uni-3 --fees 500ujunox
 
+P/S: Nếu không cài node, thì chỉ cần cài file binary của chain tương ứng, sau đó trong lệnh CLI, thì thêm option --node=http://RPC_IP:Port 
+Để tìm RPC Endpoint cho chain, vào discord dự án xin
+
 ==================================================== TASK ====================================================
 Task 1. Be in the set of the first 50 addresses to carry in/out an eligible IBC transfer of a CW20 token to/from Seinami testnet
    - Trong task này, nếu không sử dụng CLI thì cần add Sei-chain và Juno-chain vào ví Kelpr, và add cả IBC Channel trên ví Kelpr như thông tin trên.
