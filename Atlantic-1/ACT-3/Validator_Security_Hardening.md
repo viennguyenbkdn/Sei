@@ -5,7 +5,7 @@
     - [Wireguard setup guide on Ubuntu 20.04](https://www.digitalocean.com/community/tutorials/how-to-set-up-wireguard-on-ubuntu-20-04)
   + One server will be installed TMKMS to encrypt validator consensus key and sign block remotely.
   + The other server will communicate TMKMS server, but not sign block
-  + There is no validator consensus key in plain text format on both server, so no need to worry validator related compromised issue
+  + There is no validator consensus key in plain text format on both server, so no need to worry compromised validator related issue
 
 ## 2. TMKMS NODE SETUP PART
 ### 2.1 Install the following dependencies
