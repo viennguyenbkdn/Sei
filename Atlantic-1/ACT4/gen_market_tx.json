@@ -1,0 +1,52 @@
+{
+  "body": {
+    "messages": [
+      {
+        "@type": "/seiprotocol.seichain.dex.MsgPlaceOrders",
+        "creator": "sei1zqgw9lmkdu2ngsxzlze49ewq8e69yxvslcfprt",
+        "orders": [
+          {
+            "id": "0",
+            "status": "PLACED",
+            "account": "sei1zqgw9lmkdu2ngsxzlze49ewq8e69yxvslcfprt",
+            "contractAddr": "sei1466nf3zuxpya8q9emxukd7vftaf6h4psr0a07srl5zw74zh84yjqpeheyc",
+            "price": "11.10000000000000000",
+            "quantity": "0.200010000000000000",
+            "priceDenom": "UST2",
+            "assetDenom": "ATOM",
+            "orderType": "MARKET",
+            "positionDirection": "LONG",
+            "data": "{\"position_effect\":\"Open\",\"leverage\":\"1\"}",
+            "statusDescription": ""
+          }
+        ],
+        "contractAddr": "sei1466nf3zuxpya8q9emxukd7vftaf6h4psr0a07srl5zw74zh84yjqpeheyc",
+        "funds": [
+          {
+            "denom": "ust2",
+            "amount": "11100000"
+          }
+        ]
+      }      
+    ],
+    "memo": "",
+    "timeout_height": "0",
+    "extension_options": [],
+    "non_critical_extension_options": []
+  },
+  "auth_info": {
+    "signer_infos": [],
+    "fee": {
+      "amount": [
+        {
+          "denom": "usei",
+          "amount": "200"
+        }
+      ],
+      "gas_limit": "0",
+      "payer": "",
+      "granter": ""
+    }
+  },
+  "signatures": []
+}
