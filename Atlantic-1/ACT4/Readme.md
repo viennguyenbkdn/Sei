@@ -37,3 +37,5 @@ sed -i "s|SEI_ACT4|$SETUP_PATH|g" vortex_limit.sh
 17 * * * * /root/SEI_ACT4/vortex_limit.sh
 32 * * * * /root/SEI_ACT4/vortex_market.sh
 ```
+
+- Check recorded txh in `$SETUP_PATH/txh.log` 
